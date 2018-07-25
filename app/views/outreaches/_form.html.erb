@@ -1,0 +1,35 @@
+<%= form_with(model: outreach, local: true) do |form| %>
+  <% if outreach.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(outreach.errors.count, "error") %> prohibited this outreach from being saved:</h2>
+
+      <ul>
+      <% outreach.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <div class="ui input">
+      <%= form.text_field :name %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :message %><br />
+    
+
+
+
+    <%= react_component 'MessageSelect', object: "outreach", field: "message", selected: @outreach.message_id %>
+  </div>
+  
+
+  <div class="actions ui primary button">
+    <%= form.submit %>
+  </div>
+
+<% end %>
