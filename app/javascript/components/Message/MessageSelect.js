@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import superagent from 'superagent';
 import { Button, Header, Image, Modal } from 'semantic-ui-react';
 import NewMessage from './NewMessage.js';
-import store from "../store/index";
+import store from "../../store/index";
 
 class MessageSelect extends React.Component {
 	state = { modalOpen: false }
