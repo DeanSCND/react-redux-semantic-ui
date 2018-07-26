@@ -10,3 +10,20 @@ export function fetchMessages(){
     })
   }
 }
+
+export function newMessage() {
+  return dispatch => {
+    dispatch({
+      type: 'NEW_MESSAGE'
+    })
+  }
+}
+
+export function saveMessage(message) {
+  return dispatch => {
+    return dispatch({
+      type: 'SAVE_MESSAGE',
+      payload: client.post(url, message)
+    })
+  }
+}

@@ -6,15 +6,24 @@ import { fetchMessages } from '../../actions/message-actions.jsx';
 
 class MessageSelector extends React.Component {
   constructor(props) {
-	super(props);
+    super(props);
+    this.state = {
+      value: (this.props.selected == undefined) ? 0 : this.props.selected  
+    };     
   }
-
 
   componentDidMount() {
+    console.log("INPUT: " + this.props.selected)
     this.props.fetchMessages();
   }
+  
+  handleChange(event) {
+      var value = event.target.value;
+      console.log(value, " was selected");
+      this.setState({value: value});
+  }
 
-   render() {
+  render() {
     if (this.props.messages != undefined) {
 	    var items= this.props.messages.map((message) => {
 	          return (
@@ -25,7 +34,7 @@ class MessageSelector extends React.Component {
 
     return(
       <div>
-      	<select  skip_default_ids="false" allow_method_names_outside_object="true" >
+      	<select value={this.state.value} skip_default_ids="false" allow_method_names_outside_object="true" onChange={this.handleChange.bind(this)}>
         	<option key="0">Please Select</option>
             {items} 
   		</select>

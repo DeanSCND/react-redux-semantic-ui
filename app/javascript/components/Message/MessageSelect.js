@@ -3,7 +3,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import superagent from 'superagent';
 import { Button, Header, Image, Modal } from 'semantic-ui-react';
-import NewMessage from './NewMessage.js';
 import store from "../../store/index";
 
 class MessageSelect extends React.Component {
@@ -66,7 +65,7 @@ class MessageSelect extends React.Component {
 			    	<Modal.Header>Create New Message</Modal.Header>
 			    	<Modal.Content image>
 				      	<Modal.Description>
-				      		<NewMessage onSuccess={this.handleClose}/>
+				      		
 			      		</Modal.Description>
 			    	</Modal.Content>
 			  	</Modal>		
