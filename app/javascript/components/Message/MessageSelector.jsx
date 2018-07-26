@@ -13,13 +13,11 @@ class MessageSelector extends React.Component {
   }
 
   componentDidMount() {
-    console.log("INPUT: " + this.props.selected)
     this.props.fetchMessages();
   }
   
   handleChange(event) {
       var value = event.target.value;
-      console.log(value, " was selected");
       this.setState({value: value});
   }
 
