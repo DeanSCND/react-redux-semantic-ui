@@ -15,7 +15,6 @@ class MessageForm extends Component {
     }
 
     templateSelected() {
-    	console.log("HERE")
 		this.props.dispatch(change('MessageForm', 'template_id', '1'));
     }
 
