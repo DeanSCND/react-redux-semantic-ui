@@ -49,7 +49,6 @@ class NewMessage extends React.Component {
 		return (
 			<div>
 			  	<Modal 
-	        		trigger={<Button size='mini' type='button' onClick={this.handleOpen}>+</Button>}
 	        		open={this.state.modalOpen}
         			onClose={this.handleClose}>
 			    	<Modal.Header>Create New Message</Modal.Header>

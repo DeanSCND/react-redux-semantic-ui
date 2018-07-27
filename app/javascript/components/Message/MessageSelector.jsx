@@ -1,14 +1,20 @@
 import React from 'react';
-import { Button } from 'semantic-ui-react';
+import { Button, Select } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { fetchMessages } from '../../actions/message-actions.jsx';
 
 
 class MessageSelector extends React.Component {
+  options = [
+    { id: 'all', text: 'All', value: 'all' },
+    { id: 'articles', text: 'Articles', value: 'articles' },
+    { id: 'products', text: 'Products', value: 'products' },
+  ]
+
   constructor(props) {
     super(props);
     this.state = {
-      value: (this.props.selected == undefined) ? 0 : this.props.selected  
+      value: this.props.selected  
     };     
   }
 
@@ -16,26 +22,16 @@ class MessageSelector extends React.Component {
     this.props.fetchMessages();
   }
   
-  handleChange(event) {
-      var value = event.target.value;
+  handleChange(event, data) {
+      var value = data.value;
       this.setState({value: value});
   }
 
   render() {
-    if (this.props.messages != undefined) {
-	    var items= this.props.messages.map((message) => {
-	          return (
-	            <option key={message.id} value={message.id}>{message.name}</option>
-	        )
-	    });
-	}
-
     return(
       <div>
-      	<select name="outreach[message_id]" id="outreach_message_id" value={this.state.value} skip_default_ids="false" allow_method_names_outside_object="true" onChange={this.handleChange.bind(this)}>
-        	<option key="0">Please Select</option>
-            {items} 
-  		</select>
+        <Select onChange={this.handleChange.bind(this)} compact options={this.props.messages.map(s => ({ ...s, key: s.id, text: s.name, value: s.id }))} defaultValue={this.state.value} placeholder="Select Message ..." />
+        <input onChange={() => {}} name="outreach[message_id]" id="outreach_message_id" style={{display: 'none'}} value={(this.state.value == undefined) ? 0 : this.state.value  }/>
       </div>
     )
   }
