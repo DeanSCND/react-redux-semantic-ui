@@ -32,7 +32,7 @@ class MessageSelector extends React.Component {
 
     return(
       <div>
-      	<select value={this.state.value} skip_default_ids="false" allow_method_names_outside_object="true" onChange={this.handleChange.bind(this)}>
+      	<select name="outreach[message_id]" id="outreach_message_id" value={this.state.value} skip_default_ids="false" allow_method_names_outside_object="true" onChange={this.handleChange.bind(this)}>
         	<option key="0">Please Select</option>
             {items} 
   		</select>

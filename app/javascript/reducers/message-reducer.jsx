@@ -8,7 +8,6 @@ const defaultState = {
 export default (state=defaultState, action={}) => {
   switch (action.type) {
     case 'FETCH_MESSAGES_FULFILLED': {
-      console.log("Got some messages")
       return {
         ...state,
         messages: action.payload.data.data || action.payload.data // in case pagination is disabled

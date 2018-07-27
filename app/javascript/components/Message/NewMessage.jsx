@@ -7,18 +7,30 @@ import { newMessage, saveMessage} from '../../actions/message-actions.jsx';
 import { fetchTemplates } from '../../actions/template-actions.jsx';
 
 class NewMessage extends React.Component {
-	state = { modalOpen: false }
-
-	handleOpen = () => this.setState({ modalOpen: true })
-  	handleClose = () => this.setState({ modalOpen: false })
+	//handleOpen = () => this.setState({ modalOpen: true })
+  	//handleClose = () => this.setState({ modalOpen: false })
 
   	constructor(props) {
 		super(props)
+		this.state = { modalOpen: this.props.visible }
+		this.handleClose = this.handleClose.bind(this)
 	}
 
 	componentDidMount() {
 		this.props.newMessage();
 		this.props.fetchTemplates();
+	}
+
+	componentWillReceiveProps(nextProps) {
+	  // You don't have to do this check first, but it can help prevent an unneeded render
+	  if (nextProps.visible !== this.state.modalOpen) {
+	    this.setState({ modalOpen: nextProps.visible });
+	  }
+	}
+
+	handleClose() {
+		this.setState({modalOpen: false})
+		this.props.onMessageCreated(this.state.modalOpen);
 	}
 
 	submit = (message) => {
@@ -37,7 +49,7 @@ class NewMessage extends React.Component {
 		return (
 			<div>
 			  	<Modal 
-	        		trigger={<Button size='mini' type='button' onClick={this.handleOpen}>Create Message</Button>}
+	        		trigger={<Button size='mini' type='button' onClick={this.handleOpen}>+</Button>}
 	        		open={this.state.modalOpen}
         			onClose={this.handleClose}>
 			    	<Modal.Header>Create New Message</Modal.Header>

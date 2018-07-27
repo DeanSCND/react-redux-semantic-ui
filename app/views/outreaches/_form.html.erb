@@ -21,15 +21,12 @@
   <div class="field">
     <%= form.label :message %><br />
     
-
-
-
     <%= react_component 'Message/MessageComponent', object: "outreach", field: "message", selected: @outreach.message_id %>
   </div>
   
 
-  <div class="actions ui primary button">
-    <%= form.submit %>
+  <div >
+    <%= form.submit class: "actions ui primary button" %>
   </div>
 
 <% end %>
