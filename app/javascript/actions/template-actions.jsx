@@ -10,3 +10,22 @@ export function fetchTemplates(){
     })
   }
 }
+
+export function newTemplate() {
+  return dispatch => {
+    dispatch({
+      type: 'NEW_TEMPLATE'
+    })
+  }
+}
+
+export function saveTemplate(template) {
+  console.log("POSTING: " + JSON.stringify(template))
+
+  return dispatch => {
+    return dispatch({
+      type: 'SAVE_TEMPLATE',
+      payload: client.post(url, template)
+    })
+  }
+}

@@ -1,6 +1,6 @@
 module Api
 
-  class OutreachesController < ApplicationController
+  class OutreachesController < ApiController
     before_action :set_outreach, only: [:show, :edit, :update, :destroy]
 
     # GET /outreaches

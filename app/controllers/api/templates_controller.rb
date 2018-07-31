@@ -1,5 +1,5 @@
 module Api
-  class TemplatesController < ApplicationController
+  class TemplatesController < ApiController
     before_action :set_template, only: [:show, :edit, :update, :destroy]
 
     # GET /templates
@@ -31,7 +31,7 @@ module Api
       @template = Template.new(template_params)
       
       if @template.save
-        format.json { render :show, status: :created, location: @template }
+        render json: @template
       else
         format.json { render json: @template.errors, status: :unprocessable_entity }
       end
@@ -63,7 +63,7 @@ module Api
       # Never trust parameters from the scary internet, only allow the white list through.
       def template_params
 
-        params.require(:template).permit(:name, :channel)
+        params.require(:template).permit(:name, :channel, :text)
       end
   end
 end

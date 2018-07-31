@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from 'react-redux';
-import { Button, Header, Image, Modal } from 'semantic-ui-react';
+import { Button, Modal, Icon } from 'semantic-ui-react';
 import MessageForm from './MessageForm.jsx';
 import { newMessage, saveMessage} from '../../actions/message-actions.jsx';
 import { fetchTemplates } from '../../actions/template-actions.jsx';
@@ -28,6 +28,7 @@ class NewMessage extends React.Component {
 	  }
 	}
 
+	
 	handleClose() {
 		this.setState({modalOpen: false})
 		this.props.onMessageCreated(this.state.modalOpen);
@@ -50,11 +51,12 @@ class NewMessage extends React.Component {
 			<div>
 			  	<Modal 
 	        		open={this.state.modalOpen}
-        			onClose={this.handleClose}>
+        			onClose={this.handleClose}
+        			scrolling="false">
 			    	<Modal.Header>Create New Message</Modal.Header>
 			    	<Modal.Content image>
 				      	<Modal.Description>
-				      		<MessageForm message={this.props.message} templates={this.props.templates} loading={this.props.loading} onSubmit={this.submit}/>
+					    	<MessageForm message={this.props.message} templates={this.props.templates} loading={this.props.loading} onSubmit={this.submit}/>
 			      		</Modal.Description>
 			    	</Modal.Content>
 			  	</Modal>		
