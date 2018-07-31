@@ -11,19 +11,31 @@ class MessageComponent extends React.Component {
 		super(props);
 		
 		this.state = {
-      		newMessageVisible: false
+      		newMessageVisible: false,
+      		selected: this.props.selected,
+      		editMessage: false
     	};     
 
 		this.showMessageCreate = this.showMessageCreate.bind(this)
+		this.showMessageEdit = this.showMessageEdit.bind(this)
 		this.messageCreated = this.messageCreated.bind(this)
+		this.selectionChanged = this.selectionChanged.bind(this)
 	}
 
 	showMessageCreate() {
-		this.setState({ newMessageVisible:true })
+		this.setState({ newMessageVisible:true, editMessage: false })
+	}
+	showMessageEdit() {
+		this.setState({ newMessageVisible:true, editMessage: true })
+		//console.log("Selected: " + this.state.selected + " : " + this.state.editMessage + " : " + this.state.newMessageVisible)
 	}
 
 	messageCreated(state) {
 		this.setState({newMessageVisible: false})
+	}
+
+	selectionChanged(event, data) {
+		this.setState({selected: data.value})
 	}
 
   	render() {
@@ -31,12 +43,15 @@ class MessageComponent extends React.Component {
 		  <Provider store={store}>
 		  	<div>
 				<div className="ui both sides labeled input">
-					<MessageSelector selected={this.props.selected}/>
+					<MessageSelector selected={this.state.selected} onChange={this.selectionChanged}/>
 					<Button onClick={this.showMessageCreate} size="mini" type="button">
 						<Icon name='plus' />
 					</Button>
+					<Button onClick={this.showMessageEdit} size="mini" type="button">
+						<Icon name='edit' />
+					</Button>
 		  			<br/>
-		  			<NewMessage visible={this.state.newMessageVisible} onMessageCreated={this.messageCreated}/>
+		  			<NewMessage edit={this.state.editMessage} messageId={this.state.selected} visible={this.state.newMessageVisible} onMessageCreated={this.messageCreated}/>
 			  	</div>
 		 	</div>
 		  </Provider>

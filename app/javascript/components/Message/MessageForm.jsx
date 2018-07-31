@@ -18,6 +18,14 @@ class MessageForm extends Component {
 		this.handleTemplateCreated = this.handleTemplateCreated.bind(this)
     }
 
+  	componentWillReceiveProps(nextProps) { // Load Contact Asynchronously
+    	const { message } = nextProps;
+
+	    if(message.id !== this.props.message.id) { // Initialize form only once
+	      this.props.initialize(message)
+	    }
+	}
+
 	handleButtonClick() {
 		this.setState({ visible: !this.state.visible })
 		return false

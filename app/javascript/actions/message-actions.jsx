@@ -27,3 +27,21 @@ export function saveMessage(message) {
     })
   }
 }
+
+export function fetchMessage(_id) {
+  return dispatch => {
+    return dispatch({
+      type: 'FETCH_MESSAGE',
+      payload: client.get(`${url}/${_id}`)
+    })
+  }
+}
+
+export function updateMessage(message) {
+  return dispatch => {
+    return dispatch({
+      type: 'UPDATE_MESSAGE',
+      payload: client.put(`${url}/${message._id}`, message)
+    })
+  }
+}

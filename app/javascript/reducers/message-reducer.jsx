@@ -16,7 +16,7 @@ export default (state=defaultState, action={}) => {
     case 'NEW_MESSAGE': {
       return {
         ...state,
-        message: {name:{}}
+        message: {}
       }
     }
 
@@ -41,6 +41,51 @@ export default (state=defaultState, action={}) => {
       // convert feathers error formatting to match client-side error formatting
       const { "name":name, "template_id":template_id } = data.errors;
       const errors = { global: data.message, name, message_id };
+      return {
+        ...state,
+        errors: errors,
+        loading: false
+      }
+    }
+
+    case 'FETCH_MESSAGE_PENDING': {
+      return {
+        ...state,
+        loading: true,
+        message: {name:""}
+      }
+    }
+
+    case 'FETCH_MESSAGE_FULFILLED': {
+      return {
+        ...state,
+        message: action.payload.data,
+        errors: {},
+        loading: false
+      }
+    }
+
+    case 'UPDATE_MESSAGE_PENDING': {
+      return {
+        ...state,
+        loading: true
+      }
+    } 
+
+    case 'UPDATE_MESSAGE_FULFILLED': {
+      const message = action.payload.data;
+      return {
+        ...state,
+        messages: state.message.map(item => item._id === message._id ? message : item),
+        errors: {},
+        loading: false
+      }
+    }
+
+    case 'UPDATE_MESSAGE_REJECTED': {
+      const data = action.payload.response.data;
+      const { name, template_id } = data.errors;
+      const errors = { global: data.message, name, template_id };
       return {
         ...state,
         errors: errors,

@@ -25,6 +25,7 @@ class MessageSelector extends React.Component {
   handleChange(event, data) {
       var value = data.value;
       this.setState({value: value});
+      this.props.onChange(event, data)
   }
 
   render() {

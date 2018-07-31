@@ -34,7 +34,7 @@ module Api
       if @message.save
         render json: @message
       else
-        format.json { render json: @message.errors, status: :unprocessable_entity }
+        render json: @message.errors, status: :unprocessable_entity, location: @message
       end
     end
 
@@ -44,7 +44,7 @@ module Api
       if @message.update(message_params)
         format.json { render :show, status: :ok, location: @message }
       else
-        format.json { render json: @message.errors, status: :unprocessable_entity }
+        format.json { render json: @message.errors, status: :unprocessable_entity, location: @message }
       end
     end
 
