@@ -30,6 +30,10 @@ class MessageForm extends Component {
 		this.setState({ visible: !this.state.visible })
 		return false
 	}
+  	
+	// **************************************
+  	// anonymous fuction assigned to variable
+  	// **************************************
   	handleSidebarHide = () => this.setState({ visible: false })
 
     handleTemplateCreated() {
