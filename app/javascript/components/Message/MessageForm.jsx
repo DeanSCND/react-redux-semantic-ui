@@ -11,10 +11,10 @@ class MessageForm extends Component {
 
     	this.state = {
       		templates: (this.props.templates),
-      		visible: false
+      		sidebarVisible: false
     	};     
 
-		this.handleButtonClick = this.handleButtonClick.bind(this)
+		this.handleAddTemplate = this.handleAddTemplate.bind(this)
 		this.handleTemplateCreated = this.handleTemplateCreated.bind(this)
     }
 
@@ -26,18 +26,19 @@ class MessageForm extends Component {
 	    }
 	}
 
-	handleButtonClick() {
-		this.setState({ visible: !this.state.visible })
+	handleAddTemplate() {
+		this.setState({ sidebarVisible: !this.state.visible })
 		return false
 	}
   	
 	// **************************************
   	// anonymous fuction assigned to variable
+  	// fat arrow from ES6 - take from coffee
   	// **************************************
-  	handleSidebarHide = () => this.setState({ visible: false })
+  	handleSidebarHide = () => this.setState({ sidebarVisible: false })
 
     handleTemplateCreated() {
-    	this.setState({ visible: !this.state.visible })
+    	this.setState({ sidebarVisible: !this.state.sidebarVisible })
     }
 
 	render() {
@@ -57,7 +58,7 @@ class MessageForm extends Component {
 						as={Container}
 						animation='overlay'
 						onHide={this.handleSidebarHide}
-						visible={this.state.visible}
+						visible={this.state.sidebarVisible}
 						width='very wide'
 						className="ui modal transition active"
 					>
@@ -66,21 +67,23 @@ class MessageForm extends Component {
 			      			<NewTemplate onSubmit={this.handleTemplateCreated}/>
 			      		</div>
 					</Sidebar>
-					<Sidebar.Pusher dimmed={this.state.visible}>
+					<Sidebar.Pusher dimmed={this.state.sidebarVisible}>
 						<Grid columns={1}>
 							<Grid.Column>
 								<Form onSubmit={handleSubmit} loading={loading}>
 									<Field name='name' 
 										component={InputField}
         								label='Name'  
-        								placeholder='name' />
+        								placeholder='name' 
+        								disabled={submitting}/>
 					            	<Field
 								        component={SelectField}
 								        name='template_id'
 								        label="Template"
 								        options={this.props.templates.map(s => ({ ...s, key: s.id, text: s.name, value: s.id }))}
-								        placeholder="Choose One"/>
-					      			<Button type="button" onClick={this.handleButtonClick}>+</Button>
+								        placeholder="Choose One"
+								        disabled={submitting}/>
+					      			<Button type="button" onClick={this.handleAddTemplate} disabled={submitting}>+</Button>
 									<Button primary type='submit' disabled={submitting}>Create</Button>
 	      						</Form>
 					        </Grid.Column>
