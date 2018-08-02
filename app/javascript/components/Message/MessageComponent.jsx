@@ -37,6 +37,8 @@ class MessageComponent extends React.Component {
 		this.setState({selected: data.value})
 	}
 
+	
+
   	render() {
 		return(
 		  <Provider store={store}>
@@ -46,7 +48,7 @@ class MessageComponent extends React.Component {
 					<Button onClick={this.showMessageCreate} size="mini" type="button">
 						<Icon name='plus' />
 					</Button>
-					<Button onClick={this.showMessageEdit} size="mini" type="button">
+					<Button onClick={this.showMessageEdit} size="mini" type="button" disabled={this.state.selected===null}>
 						<Icon name='edit' />
 					</Button>
 		  			<br/>
