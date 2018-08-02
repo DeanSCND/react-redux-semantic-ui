@@ -30,6 +30,8 @@ module Api
     def create
       @template = Template.new(template_params)
       
+      sleep(5)
+
       if @template.save
         render json: @template
       else

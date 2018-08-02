@@ -6,7 +6,6 @@ import { Button, Icon} from 'semantic-ui-react';
 import NewMessage from './NewMessage.jsx';
 
 class MessageComponent extends React.Component {
-
   	constructor(props) {
 		super(props);
 		
@@ -56,7 +55,7 @@ class MessageComponent extends React.Component {
 		 	</div>
 		  </Provider>
 		)
-  }
+  	}
 }
 
 export default MessageComponent;

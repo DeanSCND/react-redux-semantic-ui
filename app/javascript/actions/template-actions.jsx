@@ -20,8 +20,6 @@ export function newTemplate() {
 }
 
 export function saveTemplate(template) {
-  console.log("POSTING: " + JSON.stringify(template))
-
   return dispatch => {
     return dispatch({
       type: 'SAVE_TEMPLATE',

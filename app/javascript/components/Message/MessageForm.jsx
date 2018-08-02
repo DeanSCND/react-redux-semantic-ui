@@ -43,6 +43,7 @@ class MessageForm extends Component {
 	render() {
     	const { handleSubmit, pristine, submitting, loading } = this.props;
     	const divStyle = {height: '400px'}
+		
 		var items = this.props.templates.map((template) => {
 	        return (
 	        	<option key={template.id} value={template.id}>{template.name}</option>

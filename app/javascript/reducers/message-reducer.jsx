@@ -13,6 +13,32 @@ export default (state=defaultState, action={}) => {
         messages: action.payload.data.data || action.payload.data // in case pagination is disabled
       }
     }
+
+    case 'FETCH_MESSAGE_PENDING': {
+      return {
+        ...state,
+        loading: true,
+        message: {name:""}
+      }
+    }
+
+    case 'FETCH_MESSAGE_FULFILLED': {
+      return {
+        ...state,
+        message: action.payload.data,
+        errors: {},
+        loading: false
+      }
+    }
+
+    case 'FETCH_CONTACTS_REJECTED': {
+      return {
+        ...state,
+        loading: false,
+        errors: { global: action.payload.message }
+      }
+    }
+
     case 'NEW_MESSAGE': {
       return {
         ...state,
@@ -44,23 +70,6 @@ export default (state=defaultState, action={}) => {
       return {
         ...state,
         errors: errors,
-        loading: false
-      }
-    }
-
-    case 'FETCH_MESSAGE_PENDING': {
-      return {
-        ...state,
-        loading: true,
-        message: {name:""}
-      }
-    }
-
-    case 'FETCH_MESSAGE_FULFILLED': {
-      return {
-        ...state,
-        message: action.payload.data,
-        errors: {},
         loading: false
       }
     }

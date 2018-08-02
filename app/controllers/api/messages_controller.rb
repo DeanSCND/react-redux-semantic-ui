@@ -30,6 +30,7 @@ module Api
     def create
       @message = Message.new(message_params)
 
+      sleep(5)
    
       if @message.save
         render json: @message

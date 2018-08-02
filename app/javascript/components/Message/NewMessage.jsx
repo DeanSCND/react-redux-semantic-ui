@@ -7,9 +7,6 @@ import { newMessage, saveMessage, fetchMessage, updateMessage} from '../../actio
 import { fetchTemplates } from '../../actions/template-actions.jsx';
 
 class NewMessage extends React.Component {
-	//handleOpen = () => this.setState({ modalOpen: true })
-  	//handleClose = () => this.setState({ modalOpen: false })
-
   	constructor(props) {
 		super(props)
 		this.state = { modalOpen: this.props.visible, edit: this.props.edit, messageId: this.props.messageId }

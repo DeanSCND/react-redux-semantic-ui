@@ -16,7 +16,6 @@ class NewTemplate extends React.Component {
 	submit = (template) => {
     	return this.props.saveTemplate(template)
       		.then(response => {
-      			console.log("HERE")
       			this.props.onSubmit()
       		})
       		.catch(err => {
